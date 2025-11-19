@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:vending_app/agua_video_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -137,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     context: context,
                     icono: Icons.water_drop,
                     label: "Agua",
-                    screen: const AguaScreen(),
+                    screen: const AguaVideoScreen(),
                   ),
                   productButton(
                     context: context,
@@ -165,19 +166,19 @@ class _HomeScreenState extends State<HomeScreen> {
 //        PANTALLAS DE PRODUCTOS (VACÍAS POR AHORA)
 //////////////////////////////////////////////////////////
 
-class AguaScreen extends StatelessWidget {
-  const AguaScreen({super.key});
+//class AguaScreen extends StatelessWidget {
+//  const AguaScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Agua")),
-      body: const Center(
-        child: Text("Pantalla de Agua", style: TextStyle(fontSize: 24)),
-      ),
-    );
-  }
-}
+//  @override
+//  Widget build(BuildContext context) {
+    //return Scaffold(
+      //appBar: AppBar(title: const Text("Agua")),
+      //body: const Center(
+        //child: Text("Pantalla de Agua", style: TextStyle(fontSize: 24)),
+      //),
+    //);
+  //}
+//}
 
 class DetergenteScreen extends StatelessWidget {
   const DetergenteScreen({super.key});
