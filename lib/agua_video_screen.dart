@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class AguaVideoScreen extends StatefulWidget {
   const AguaVideoScreen({super.key});
@@ -9,22 +10,25 @@ class AguaVideoScreen extends StatefulWidget {
 }
 
 class _AguaVideoScreenState extends State<AguaVideoScreen> {
-  late VideoPlayerController controller;
+  late final player = Player();
+  late final controller = VideoController(player);
 
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset('assets/videos/garrafon.mp4')
-      ..initialize().then((_) {
-        controller.play();
-        controller.setLooping(true);
-        setState(() {});
-      });
+
+    player.setPlaylistMode(PlaylistMode.loop);
+
+    player.open(
+      Media('assets/videos/garrafon.mp4'),
+    );
+
+    player.play();
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    player.dispose();
     super.dispose();
   }
 
@@ -32,16 +36,9 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: controller.value.isInitialized
-          ? Center(
-              child: AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
-                child: VideoPlayer(controller),
-              ),
-            )
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
+      body: Center(
+        child: Video(controller: controller),
+      ),
     );
   }
 }
