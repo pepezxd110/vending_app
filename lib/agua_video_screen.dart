@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:flutter/material.dart';
 
 class AguaVideoScreen extends StatefulWidget {
   const AguaVideoScreen({super.key});
@@ -10,20 +13,37 @@ class AguaVideoScreen extends StatefulWidget {
 }
 
 class _AguaVideoScreenState extends State<AguaVideoScreen> {
-  late final player = Player();
-  late final controller = VideoController(player);
+  late final Player player = Player();
+  late final VideoController controller = VideoController(player);
+  bool ready = false;
+  String? videoPath;
 
   @override
   void initState() {
     super.initState();
+    loadVideo();
+  }
 
-    player.setPlaylistMode(PlaylistMode.loop);
+  Future<void> loadVideo() async {
+    // 1. Cargar el asset como bytes
+    final bytes = await rootBundle.load('assets/videos/garrafon.mp4');
 
-    player.open(
-      Media('assets/videos/garrafon.mp4'),
+    // 2. Obtener carpeta temporal
+    final dir = await getTemporaryDirectory();
+    final file = File('${dir.path}/garrafon.mp4');
+
+    // 3. Guardar bytes en archivo físico
+    await file.writeAsBytes(bytes.buffer.asUint8List());
+
+    videoPath = file.path;
+
+    // 4. Reproducir
+    await player.open(
+      Media(videoPath!),
+      play: true,
     );
 
-    player.play();
+    setState(() => ready = true);
   }
 
   @override
@@ -35,9 +55,11 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Center(
-        child: Video(controller: controller),
+        child: ready
+            ? Video(controller: controller)
+            : const CircularProgressIndicator(color: Colors.white),
       ),
     );
   }
