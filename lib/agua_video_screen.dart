@@ -45,7 +45,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   Future<void> _loadVideo() async {
     /// 👉 NO cambio NADA de tu ruta, lo de assets queda igual
     await player.open(
-      Media('asset:///assets/videos/agua.mp4'),
+      Media('asset:///assets/videos/garrafon.mp4'),
       play: true,
     );
 
