@@ -48,7 +48,23 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
       body: Row(
         children: [
           // -----------------------------------
-          // LADO IZQUIERDO — TEXTO + FONDO BLANCO
+          // IZQUIERDA — VIDEO con fondo blanco
+          // -----------------------------------
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.white,    // <-- elimina líneas negras
+              child: Center(
+                child: Video(
+                  controller: controller,
+                  controls: null,
+                ),
+              ),
+            ),
+          ),
+
+          // -----------------------------------
+          // DERECHA — TEXTO
           // -----------------------------------
           Expanded(
             flex: 1,
@@ -57,25 +73,13 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
               child: const Center(
                 child: Text(
                   "LLENANDO GARRAFÓN",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-              ),
-            ),
-          ),
-
-          // -----------------------------------
-          // LADO DERECHO — VIDEO
-          // -----------------------------------
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: Video(
-                controller: controller,
-                controls: null,
               ),
             ),
           ),
