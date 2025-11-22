@@ -29,7 +29,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     );
 
     player.open(
-      Media("asset:///assets/videos/llenado.mp4"),
+      Media("asset:///assets/videos/escalado.mp4"),
       play: true,
     );
 
@@ -54,41 +54,20 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   flex: 1,
   child: Container(
     color: Colors.white,
-    child: LayoutBuilder(
-      builder: (context, constraints) {
-        final double targetWidth = 512;   // mitad izquierda (≈512 px)
-        final double targetHeight = 600; // toda la altura (600 px)
-
-        final double videoWidth = 720;
-        final double videoHeight = 1280;
-
-        // Escala necesaria para que el video LLENE el alto sin dejar barras
-        double scale = targetHeight / videoHeight;
-
-        return Center(
-          child: Transform.scale(
-            scale: scale,                 // reduce altura y ensancha proporcionalmente
-            child: SizedBox(
-              width: videoWidth,
-              height: videoHeight,
-              child: ClipRect(
-                child: OverflowBox(
-                  maxWidth: targetWidth / scale,   // expande horizontalmente
-                  maxHeight: targetHeight / scale,
-                  child: Video(
-                    controller: controller,
-                    controls: null,
-                    fit: BoxFit.cover,             // recorta donde sea necesario
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
+    child: Center(
+      child: SizedBox(
+        width: 400,     // ⬅ tu video exacto
+        height: 600,    // ⬅ tu video exacto
+        child: Video(
+          controller: controller,
+          controls: null,
+          fit: BoxFit.fill,   // ⬅ Rellena sin deformar porque el video ya tiene el tamaño exacto
+        ),
+      ),
     ),
   ),
 ),
+
 
 
 
