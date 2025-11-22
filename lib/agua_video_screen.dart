@@ -33,9 +33,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     controller = VideoController(
   player,
   configuration: const VideoControllerConfiguration(
-    vo: 'libmpv',
-    hwdec: 'auto',
-    enableHardwareAcceleration: true,
+    enableHardwareAcceleration: false,
   ),
 );
 
