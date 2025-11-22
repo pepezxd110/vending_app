@@ -33,9 +33,9 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     controller = VideoController(
       player = Player(),
       configuration: const VideoControllerConfiguration(
-        vo: 'gpu-next',          // <- El backend más estable en Raspberry Pi
-        hwdec: 'rpi',        // <- Evita usar hardware acceleration incompatible
-        enableHardwareAcceleration: true,
+        vo: 'sdl',          // <- El backend más estable en Raspberry Pi
+        hwdec: 'no',        // <- Evita usar hardware acceleration incompatible
+        enableHardwareAcceleration: false,
       ),
     );
 
