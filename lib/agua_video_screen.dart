@@ -29,7 +29,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     );
 
     player.open(
-      Media("asset:///assets/videos/garrafon.mp4"),
+      Media("asset:///assets/videos/garrafon2.mp4"),
       play: true,
     );
 
@@ -52,22 +52,10 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
           // -----------------------------------
           Expanded(
   flex: 1,
-  child: ClipRect(
-    child: SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: FittedBox(
-        fit: BoxFit.fill,   // <-- llena TODO el espacio disponible
-        child: SizedBox(
-          width: 1280,      // <-- ancho real del video
-          height: 720,      // <-- alto real del video
-          child: Video(
-            controller: controller,
-            controls: null,
-          ),
-        ),
-      ),
-    ),
+  child: Video(
+    controller: controller,
+    controls: null,
+    fit: BoxFit.cover,   // <-- llena sin barras y sin deformar el garrafón
   ),
 ),
 
