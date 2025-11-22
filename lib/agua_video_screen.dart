@@ -33,7 +33,6 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
       play: true,
     );
 
-    // 🔁 Repetir video infinitamente
     player.setPlaylistMode(PlaylistMode.loop);
   }
 
@@ -46,11 +45,41 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Video(
-          controller: controller,
-          controls: null,   // ❌ Sin barra de controles
-        ),
+      body: Row(
+        children: [
+          // -----------------------------------
+          // LADO IZQUIERDO — TEXTO + FONDO BLANCO
+          // -----------------------------------
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.white,
+              child: const Center(
+                child: Text(
+                  "LLENANDO GARRAFÓN",
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // -----------------------------------
+          // LADO DERECHO — VIDEO
+          // -----------------------------------
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: Video(
+                controller: controller,
+                controls: null,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
