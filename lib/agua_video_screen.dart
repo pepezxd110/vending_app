@@ -29,7 +29,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     );
 
     player.open(
-      Media("asset:///assets/videos/garrafon2.mp4"),
+      Media("asset:///assets/videos/Garrafon2.mp4"),
       play: true,
     );
 
