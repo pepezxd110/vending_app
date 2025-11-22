@@ -51,17 +51,27 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
           // IZQUIERDA — VIDEO con fondo blanco
           // -----------------------------------
           Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.white,    // <-- elimina líneas negras
-              child: Center(
-                child: Video(
-                  controller: controller,
-                  controls: null,
-                ),
-              ),
+  flex: 1,
+  child: Container(
+    color: Colors.white,
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        return FittedBox(
+          fit: BoxFit.cover,               // <-- LLENA TODO y RECORTA
+          child: SizedBox(
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            child: Video(
+              controller: controller,
+              controls: null,
             ),
           ),
+        );
+      },
+    ),
+  ),
+),
+
 
           // -----------------------------------
           // DERECHA — TEXTO
