@@ -56,8 +56,8 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     color: Colors.white,
     child: LayoutBuilder(
       builder: (context, constraints) {
-        final double targetWidth = constraints.maxWidth;   // mitad izquierda (≈512 px)
-        final double targetHeight = constraints.maxHeight; // toda la altura (600 px)
+        final double targetWidth = 512;   // mitad izquierda (≈512 px)
+        final double targetHeight = 600; // toda la altura (600 px)
 
         final double videoWidth = 720;
         final double videoHeight = 1280;
