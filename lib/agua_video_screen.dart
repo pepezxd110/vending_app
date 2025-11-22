@@ -22,7 +22,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     controller = VideoController(
       player,
       configuration: const VideoControllerConfiguration(
-        vo: 'libmpv',          // <-- usar este backend
+        vo: 'libmpv',
         hwdec: 'auto',
         enableHardwareAcceleration: false,
       ),
@@ -30,12 +30,15 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
 
     player.open(
       Media("asset:///assets/videos/garrafon.mp4"),
+      play: true,
     );
+
+    // 🔁 Repetir video infinitamente
+    player.setPlaylistMode(PlaylistMode.loop);
   }
 
   @override
   void dispose() {
-
     player.dispose();
     super.dispose();
   }
@@ -44,7 +47,10 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Video(controller: controller),
+        child: Video(
+          controller: controller,
+          controls: null,   // ❌ Sin barra de controles
+        ),
       ),
     );
   }
