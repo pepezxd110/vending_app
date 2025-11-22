@@ -31,7 +31,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   Future<void> _start() async {
     await player.open(
       Media(
-        'asset:///assets/videos/garrafon.mp4',
+        'https://user-images.githubusercontent.com/28951144/229373695-22f88f13-d18f-4288-9bf1-c3e078d83722.mp4',
       ),
     );
     setState(() {
