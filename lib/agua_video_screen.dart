@@ -52,27 +52,44 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
           // -----------------------------------
           Expanded(
   flex: 1,
-  child: LayoutBuilder(
-    builder: (context, constraints) {
-      return Container(
-        width: constraints.maxWidth,
-        height: constraints.maxHeight,
-        color: Colors.white,
-        child: FittedBox(
-          fit: BoxFit.cover,        // <-- Llenar completo sin barras
-          child: SizedBox(
-            width: 720,             // resolución REAL del video
-            height: 1280,
-            child: Video(
-              controller: controller,
-              controls: null,
+  child: Container(
+    color: Colors.white,
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        final double targetWidth = constraints.maxWidth;   // mitad izquierda (≈512 px)
+        final double targetHeight = constraints.maxHeight; // toda la altura (600 px)
+
+        final double videoWidth = 720;
+        final double videoHeight = 1280;
+
+        // Escala necesaria para que el video LLENE el alto sin dejar barras
+        double scale = targetHeight / videoHeight;
+
+        return Center(
+          child: Transform.scale(
+            scale: scale,                 // reduce altura y ensancha proporcionalmente
+            child: SizedBox(
+              width: videoWidth,
+              height: videoHeight,
+              child: ClipRect(
+                child: OverflowBox(
+                  maxWidth: targetWidth / scale,   // expande horizontalmente
+                  maxHeight: targetHeight / scale,
+                  child: Video(
+                    controller: controller,
+                    controls: null,
+                    fit: BoxFit.cover,             // recorta donde sea necesario
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
-      );
-    },
+        );
+      },
+    ),
   ),
 ),
+
 
 
 
