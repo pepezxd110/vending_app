@@ -24,7 +24,7 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
       configuration: const VideoControllerConfiguration(
         vo: 'libmpv',          // <-- usar este backend
         hwdec: 'auto',
-        enableHardwareAcceleration: true,
+        enableHardwareAcceleration: false,
       ),
     );
 
