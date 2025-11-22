@@ -31,13 +31,13 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
     /// Esto evita el crash y funciona perfecto en RPi 4 / 400 / 5.
 
     controller = VideoController(
-      player = Player(),
-      configuration: const VideoControllerConfiguration(
-        vo: 'sdl',          // <- El backend más estable en Raspberry Pi
-        hwdec: 'no',        // <- Evita usar hardware acceleration incompatible
-        enableHardwareAcceleration: false,
-      ),
-    );
+  player,
+  configuration: const VideoControllerConfiguration(
+    vo: 'libmpv',
+    hwdec: 'auto',
+    enableHardwareAcceleration: true,
+  ),
+);
 
     _loadVideo();
   }
