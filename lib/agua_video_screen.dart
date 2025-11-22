@@ -12,46 +12,30 @@ class AguaVideoScreen extends StatefulWidget {
 class _AguaVideoScreenState extends State<AguaVideoScreen> {
   late final Player player;
   late final VideoController controller;
-  bool ready = false;
 
   @override
   void initState() {
     super.initState();
 
-    /// ⚠️⚠️ CONFIGURACIÓN ESPECIAL PARA RASPBERRY PI ⚠️⚠️
-    ///
-    /// Esta configuración evita que MPV intente usar:
-    /// - NVIDIA CUDA
-    /// - VDPAU
-    /// - NVDEC
-    /// - GPU desktop incompatible en Raspberry Pi
-    ///
-    /// Y utiliza un backend seguro: `sdl`
-    ///
-    /// Esto evita el crash y funciona perfecto en RPi 4 / 400 / 5.
+    player = Player();
 
     controller = VideoController(
-  player,
-  configuration: const VideoControllerConfiguration(
-    enableHardwareAcceleration: false,
-  ),
-);
-
-    _loadVideo();
-  }
-
-  Future<void> _loadVideo() async {
-    /// 👉 NO cambio NADA de tu ruta, lo de assets queda igual
-    await player.open(
-      Media('asset:///assets/videos/garrafon.mp4'),
-      play: true,
+      player,
+      configuration: const VideoControllerConfiguration(
+        vo: 'libmpv',          // <-- usar este backend
+        hwdec: 'auto',
+        enableHardwareAcceleration: true,
+      ),
     );
 
-    setState(() => ready = true);
+    player.open(
+      Media("asset:///assets/videos/garrafon.mp4"),
+    );
   }
 
   @override
   void dispose() {
+
     player.dispose();
     super.dispose();
   }
@@ -59,16 +43,9 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: ready
-          ? Center(
-              child: Video(
-                controller: controller,
-              ),
-            )
-          : const Center(
-              child: CircularProgressIndicator(color: Colors.white),
-            ),
+      body: Center(
+        child: Video(controller: controller),
+      ),
     );
   }
 }
