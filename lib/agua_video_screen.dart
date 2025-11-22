@@ -51,13 +51,13 @@ class _AguaVideoScreenState extends State<AguaVideoScreen> {
           // IZQUIERDA — VIDEO con fondo blanco
           // -----------------------------------
           Expanded(
-  flex: 1,
-  child: Video(
-    controller: controller,
-    controls: null,
-    fit: BoxFit.cover,   // <-- llena sin barras y sin deformar el garrafón
-  ),
-),
+          flex: 1,
+          child: Video(
+          controller: controller,
+          controls: null,
+          fit: BoxFit.cover,   // <-- llena sin barras y sin deformar el garrafón
+        ),
+          ),
 
 
 
